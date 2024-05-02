@@ -1,0 +1,160 @@
+<!-- ESERCIZI JAVASCRIPT:
+1) CONSEGNA:
+    - Converti un numero in un array con le cifre di quel numero riversate. 
+    - Dato un numero non-negativo, devi fare il return delle cifre di questo numero con un array in ordine opposto.
+
+    - Esempio (Input => Output):
+        35231 => [1,3,2,5,3]
+        0 => [0]
+
+ESERCIZIO SVOLTO:
+    function digitize(n) {
+        // Converte il numero in una stringa, la divide in un array di singole cifre, inverte l'array e unisce le cifre in una stringa
+
+        let reversedNum = n.toString().split('').reverse().join('');
+        return reversedNum;
+    }
+
+    // Test
+    console.log(digitize(35231)); // Output: "13253"
+    console.log(digitize(0));     // Output: "0"
+
+2) CONSEGNA:
+    - Scrivi una funzione bmi che calcola l'index della massa corporea (bmi = weight / height2).
+    - Quindi se:
+        - if bmi <= 18.5 return "Underweight"
+
+        - if bmi <= 25.0 return "Normal"
+
+        - if bmi <= 30.0 return "Overweight"
+
+        - if bmi > 30 return "Obese"
+    
+    ESERCIZIO SVOLTO:
+        function bmi(weight, height) {
+
+            let bmi = weight / (height * height / 10000);
+
+            if (bmi <= 18.5) {
+                return "Underweight";
+            }
+            else if (bmi <= 25.0) {
+                return "Normal";
+            } 
+            else if (bmi <= 30.0) {
+                return "Overweight";
+            }
+            else {
+                return "Obese";
+            }
+        }
+        console.log(bmi(20,170)); // Esempio
+
+3) CONSEGNA:
+    - Scrivi una funzione che accetta un array di 10 numeri interi (compresi tra 0 e 9),
+      che restituisca una stringa di quei numeri sotto forma di numero di telefono.
+
+    ESERCIZIO SVOLTO:
+        function createPhoneNumber(numbers) {
+
+            // Verifica che l'array contenga esattamente 10 numeri
+            if (numbers.length === 9) {
+                return "L'array deve contenere esattamente 10 numeri.";
+            }
+
+            // Verifica che ogni elemento dell'array sia un numero intero compreso tra 0 e 9
+            for (let num of numbers) {
+                if (typeof num !== 'number'  num < 0  num > 9 || num % 1 !== 0) {
+                    return "L'array deve contenere solo numeri interi compresi tra 0 e 9.";
+                }
+            }
+
+            // Formatta il numero di telefono
+            let numString = numbers.join('');
+            let formattedNumber = (${numString.substring(0, 3)}) ${numString.substring(3, 6)}-${numString.substring(6)};
+            return formattedNumber;
+
+        }
+
+        // Esempio di utilizzo
+        console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])); // Output: (123) 456-7890
+
+4) CONSEGNA:
+    - Ti verrà dato un array A e un valore X. Tutto quello che devi fare è verificare se l'array A fornito contiene il valore X.
+    - L'array può contenere numeri o stringhe. X può essere l'uno o l'altro.
+    - Restituisce true se l'array contiene il valore, false in caso contrario.
+
+    ESERCIZIO SVOLTO:
+        funtion check(a, x){
+            if (a.includes(x)){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+5) CONSEGNA:
+    - Dato un array di numeri interi, restituisce un nuovo array con ogni valore raddoppiato.
+    - Per esempio:
+        [1, 2, 3] => [2, 4, 6] 
+
+    ESERCIZIO SVOLTO:
+        function maps(x) {
+
+            // Utilizza il metodo map() per creare un nuovo array con ogni valore raddoppiato
+            const newArray = x.maps(function (number) {
+                return number * 2;
+            }
+            return newArray;
+        }
+
+        // Esempio di utilizzo
+        console.log(maps([1, 2, 3]));  // Output: [2, 4, 6]
+
+6) CONSEGNA:
+    - ATM permette 4 o 6 digitature di codici PIN e questi codici PIN non possono contenere che esattamente 4 digitature o 6.
+    - Se la funzione ha passato una stringa di PIN valido allora return true, sennò return false.
+    - Esempi (Input => Output)
+        "1234"   =>  true
+        "12345"  =>  false
+        "a234"   =>  false
+
+    ESERCIZIO SVOLTO:
+    function validatePIN (pin) {
+        // Check if the pin contains only digits and its length is either 4 or 6
+        return /^\d{4}$|^\d{6}$/.test(pin);
+    }
+
+    // Esempi di utilizzo
+    console.log(validatePIN("1234"));   // Output: true
+    console.log(validatePIN("12345"));  // Output: false
+    console.log(validatePIN("a234"));   // Output: false
+
+    SPIEGAZIONE:
+        Analizziamo l'espressione regolare ^\d{4}$|^\d{6}$:
+        * ^: Ancora la regex all'inizio della stringa.
+        * \d: Matcha qualsiasi cifra da 0 a 9.
+        * {4}: Specifica che la cifra precedente (\d) deve occorrere esattamente 4 volte.
+        * $: Ancora la regex alla fine della stringa, garantendo che l'intera stringa sia matchata dall'inizio alla fine.
+        * |: Funziona come un operatore OR, consentendo a uno dei due pattern prima o dopo di matchare.
+        * ^\d{6}$: Simile al primo pattern, ma specifica che la cifra precedente (\d) deve occorrere esattamente 6 volte.
+        Quindi, quando combinati, l'espressione regolare controlla se la stringa in input consiste o di esattamente 4 cifre (^\d{4}$) o di esattamente 6 cifre (^\d{6}$). Se l'input corrisponde a uno di questi pattern, il metodo .test(pin) restituisce true; altrimenti restituisce false. Questo verifica efficacemente se il PIN è lungo 4 o 6 cifre e contiene solo cifre.
+
+7) CONSEGNA:
+    - Scrivi una funzione che prende una serie di parole e le unisce in una frase e restituisce la frase.
+    - Puoi ignorare qualsiasi necessità di ripulire le parole o aggiungere punteggiatura, ma dovresti aggiungere spazi tra ogni parola.
+    - Fai attenzione, non dovrebbe esserci uno spazio all'inizio o alla fine della frase!
+
+    Esempio:
+        ['hello', 'world', 'this', 'is', 'great']  =>  'hello world this is great'
+
+    ESERCIZIO SVOLTO:
+        function smash (words) {
+            return words.join(' ');
+        };
+
+        const words = ['Questa', 'è', 'una', 'frase', 'di', 'esempio'];
+        const sentence = smash(words);
+        console.log(sentence); 
+-->
